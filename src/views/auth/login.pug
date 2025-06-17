@@ -9,7 +9,14 @@ block pageContent
 			div.flex.flex-col.gap-2
 				label(for="password") Password:
 				input(type="password", name="password", required, class="border-1 p-1", placeholder="Your super secure password")
+			if error
+				p.text-red-600= error
 			button(type="submit" class="border-1 w-[128px] py-2 px-3 ml-auto mr-auto hover:bg-black hover:text-white") Log in
+			div.flex.gap-2
+				p Don't have an account?
+				a(href="/register") 
+					span.text-orange-600 Sign up
+		
 
 
 

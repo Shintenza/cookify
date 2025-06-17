@@ -1,14 +1,15 @@
 import express from "express";
-import expressLayouts from "express-ejs-layouts";
 import path from "path";
 import session from "express-session";
 import config from "./config/config";
 import mainRoutes from "./routes/main";
+import authRoutes from "./routes/auth";
 
 declare module "express-session" {
   interface SessionData {
     user?: {
-      username: string;
+      email: string;
+      fullName: string;
     };
   }
 }
@@ -17,6 +18,7 @@ const app = express();
 app.set("view engine", "pug");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
     secret: config.sessionSecret,
@@ -37,5 +39,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", mainRoutes);
+app.use("/", authRoutes);
 
 export default app;
