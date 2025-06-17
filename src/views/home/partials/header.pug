@@ -1,0 +1,10 @@
+div(class="flex justify-between h-[128px] items-center px-[64px] border-b-2 mb-[32px]")
+  h1.text-bold.text-4xl Plateful
+  if user
+    h1 Welcome, #{user.username}!
+    a(href="/logout") Logout
+  else
+    a(href='/login')
+      button(class="border-1 px-4 py-2 flex flex-row gap-2 items-center cursor-pointer hover:bg-black hover:text-white")
+        i.fa-solid.fa-arrow-right-to-bracket
+        span Log in

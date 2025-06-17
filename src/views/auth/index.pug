@@ -1,0 +1,18 @@
+extends layout
+
+block pageContent
+	form(method="POST", action="login")
+		div.flex.gap-5.flex-col
+			div.flex.flex-col.gap-2
+				label(for="email") Email:
+				input(type="text", name="email", required, class="border-1 p-1", placeholder="e.g. john.doe@mail.com")
+			div.flex.flex-col.gap-2
+				label(for="password") Password:
+				input(type="password", name="password", required, class="border-1 p-1", placeholder="Your super secure password")
+			button(type="submit" class="border-1 w-[128px] py-2 px-3 ml-auto mr-auto hover:bg-black hover:text-white") Log in
+
+
+
+
+			
+        
