@@ -1,4 +1,4 @@
-export enum UserRole {
-  USER = "user",
-  ADMIN = "admin",
-}
+import { User } from "../models/User";
+
+export type UserRole = "ADMIN" | "USER";
+export type UserPayload = Omit<User, "password">;

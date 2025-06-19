@@ -3,7 +3,7 @@ import AppDataSource from "../config/data-source";
 import { LoginData, RegisterData } from "../controllers/types";
 import { User } from "../models/User";
 import { comparePassword, hashPassword } from "../utils/hash";
-import { UserExists } from "./errors";
+import { InvalidCredentials, UserExists } from "./errors";
 
 const userRepository = AppDataSource.getRepository(User);
 
@@ -32,12 +32,12 @@ export const loginUser = async ({ email, password }: LoginData) => {
   const user = await userRepository.findOneBy({ email });
 
   if (!user) {
-    throw new Error();
+    throw new InvalidCredentials();
   }
 
   const isPasswordMatching = await comparePassword(password, user.password);
   if (!isPasswordMatching) {
-    throw new Error();
+    throw new InvalidCredentials();
   }
 
   return user;

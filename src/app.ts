@@ -5,6 +5,7 @@ import config from "./config/config";
 import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
 import recipeRoutes from "./routes/recipe";
+import restRouter from "./routes/api";
 import fs from "fs";
 import { passQueryToLocals, userMiddleware } from "./middleware/userData";
 import { UserRole } from "./types/user";
@@ -15,6 +16,17 @@ declare module "express-session" {
       email: string;
       fullName: string;
       role: UserRole;
+    } | null;
+  }
+}
+
+declare module "express" {
+  export interface Request {
+    user?: {
+      fullName: string;
+      email: string;
+      role: "ADMIN" | "USER";
+      id: number;
     } | null;
   }
 }
@@ -43,6 +55,7 @@ if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
 }
 
+app.use("/api", restRouter);
 app.use("/recipe", recipeRoutes);
 app.use("/", mainRoutes);
 app.use("/", authRoutes);

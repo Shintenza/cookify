@@ -2,21 +2,26 @@
   "type": "commonjs",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
     "pug": "^3.0.3",
     "reflect-metadata": "^0.2.2",
     "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.24"
+    "typeorm": "^0.3.24",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.10",
     "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.9",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.3",
     "@types/express-session": "^1.18.2",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^1.4.13",
     "@types/node": "^24.0.3",
     "concurrently": "^9.1.2",

@@ -16,7 +16,7 @@ export class User {
   password!: string;
 
   @Column({
-    default: UserRole.USER,
+    default: "USER",
   })
   role!: UserRole;
 }

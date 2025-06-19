@@ -33,12 +33,17 @@ export const createRecipe = async (
     errors.image = "Image of the dish is required";
   }
 
-  const processedSteps = processDashData(recipe.steps);
+  const processedSteps = Array.isArray(recipe.steps)
+    ? recipe.steps
+    : processDashData(recipe.steps);
+
   if (processedSteps.length === 0) {
     errors.steps = "At least one step is required";
   }
 
-  const processedIngredients = processDashData(recipe.ingredients);
+  const processedIngredients = Array.isArray(recipe.ingredients)
+    ? recipe.ingredients
+    : processDashData(recipe.ingredients);
   if (processedIngredients.length === 0) {
     errors.ingredients = "At least one ingredient is required";
   }
@@ -154,4 +159,8 @@ export const searchRecipes = async (filters: SearchFilters) => {
     ...recipe,
     image: getImagePath(recipe.image),
   }));
+};
+
+export const removeRecipe = async (recipeId?: number) => {
+  await recipeRepository.delete({ id: recipeId });
 };
