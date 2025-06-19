@@ -194,12 +194,6 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .my-5 {
-    margin-block: calc(var(--spacing) * 5);
-  }
-  .mt-5 {
-    margin-top: calc(var(--spacing) * 5);
-  }
   .mt-10 {
     margin-top: calc(var(--spacing) * 10);
   }
@@ -251,14 +245,8 @@
   .h-\[32px\] {
     height: 32px;
   }
-  .h-\[48px\] {
-    height: 48px;
-  }
   .h-\[58px\] {
     height: 58px;
-  }
-  .h-\[64px\] {
-    height: 64px;
   }
   .h-\[128px\] {
     height: 128px;
@@ -284,14 +272,8 @@
   .w-\[32px\] {
     width: 32px;
   }
-  .w-\[48px\] {
-    width: 48px;
-  }
   .w-\[58px\] {
     width: 58px;
-  }
-  .w-\[64px\] {
-    width: 64px;
   }
   .w-\[75\%\] {
     width: 75%;
@@ -304,6 +286,18 @@
   }
   .w-\[128px\] {
     width: 128px;
+  }
+  .w-\[200px\] {
+    width: 200px;
+  }
+  .w-\[230px\] {
+    width: 230px;
+  }
+  .w-\[300px\] {
+    width: 300px;
+  }
+  .w-\[320px\] {
+    width: 320px;
   }
   .w-\[450px\] {
     width: 450px;
@@ -328,9 +322,6 @@
   }
   .flex-col {
     flex-direction: column;
-  }
-  .flex-row {
-    flex-direction: row;
   }
   .items-center {
     align-items: center;
@@ -368,9 +359,6 @@
   .gap-10 {
     gap: calc(var(--spacing) * 10);
   }
-  .gap-20 {
-    gap: calc(var(--spacing) * 20);
-  }
   .gap-\[128px\] {
     gap: 128px;
   }
@@ -380,6 +368,9 @@
       margin-inline-start: calc(calc(var(--spacing) * 6) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-x-reverse)));
     }
+  }
+  .rounded {
+    border-radius: 0.25rem;
   }
   .rounded-full {
     border-radius: calc(infinity * 1px);
@@ -393,6 +384,10 @@
   .rounded-t-xl {
     border-top-left-radius: var(--radius-xl);
     border-top-right-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
   .border-1 {
     border-style: var(--tw-border-style);
@@ -418,6 +413,9 @@
   }
   .bg-gray-100 {
     background-color: var(--color-gray-100);
+  }
+  .bg-red-600 {
+    background-color: var(--color-red-600);
   }
   .bg-sky-200 {
     background-color: var(--color-sky-200);
@@ -454,6 +452,15 @@
   }
   .px-\[64px\] {
     padding-inline: 64px;
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-1\.75 {
+    padding-block: calc(var(--spacing) * 1.75);
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);

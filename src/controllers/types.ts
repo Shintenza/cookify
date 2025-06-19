@@ -28,3 +28,9 @@ export type HomeCardDetails = Pick<RecipeFormData, "name" | "time" | "level">;
 export type CommentFormData = {
   text: string;
 };
+
+export type SearchFilters = {
+  name?: string;
+  mealType?: MealType;
+  level?: SkillLevel;
+};

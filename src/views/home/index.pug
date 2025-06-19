@@ -2,7 +2,7 @@ extends layout
 include ../partials/recipeCard.pug
 
 block pageContent
-  div(class="flex flex-col gap-5")
+  div(class="flex flex-col gap-5 w-[80%] mx-auto")
     h1(class="custom-header") Recently added
     div(class="grid grid-cols-3 gap-3")
       each recipe in recipes

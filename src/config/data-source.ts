@@ -8,7 +8,7 @@ const AppDataSource = new DataSource({
   type: "sqlite",
   database: "database.db",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [User, Recipe, RecipeComment],
 });
 

@@ -1,10 +1,11 @@
 import AppDataSource from "../config/data-source";
-import { RecipeFormData } from "../controllers/types";
+import { RecipeFormData, SearchFilters } from "../controllers/types";
 import { Recipe } from "../models/Recipe";
 import { RecipeCreationError } from "./errors";
 import { User } from "../models/User";
 import { getImagePath } from "../utils/image";
 import { RecipeComment } from "../models/Comment";
+import { ILike } from "typeorm";
 var os = require("os");
 
 const PAGE_LIMIT = 6;
@@ -137,4 +138,20 @@ export const saveComment = async (
   newComment.text = comment;
 
   await commentRepository.save(newComment);
+};
+
+export const searchRecipes = async (filters: SearchFilters) => {
+  const matchingRecipes = await recipeRepository.find({
+    relations: ["author"],
+    where: {
+      ...(filters.mealType ? { mealType: filters.mealType } : {}),
+      ...(filters.level ? { level: filters.level } : {}),
+      ...(filters.name ? { name: ILike(`%${filters.name}%`) } : {}),
+    },
+  });
+
+  return matchingRecipes.map((recipe) => ({
+    ...recipe,
+    image: getImagePath(recipe.image),
+  }));
 };

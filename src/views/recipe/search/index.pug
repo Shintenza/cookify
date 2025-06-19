@@ -1,0 +1,25 @@
+extends ../layout
+include ../partials/formFields
+include ../../partials/recipeCard
+
+block recipeContent
+  div.flex.flex-col.w-full
+    h1.custom-header.mb-5 Filters
+    div
+      form(action="/recipe/search" method="GET")
+        div.flex.justify-between.w-full
+          div.flex.gap-10
+            div(class="flex flex-col w-[320px]")
+              label(for="name", class="mb-2") Name
+              input(type="text" name="name" placeholder="Search by name..." class="border px-3 py-1.75" value=query.name)
+            +MealTypeDropdown(query.mealType, true)
+            +LevelDropdown(query.level, true)
+          
+          button(class="brand-button" type="submit")
+            i.fa-solid.fa-magnifying-glass
+            span Search
+    h1.custom-header.mb-5.mt-10 Matching results
+
+    div(class="grid grid-cols-3 gap-3")
+      each recipe in recipes
+        +RecipeCard(recipe)

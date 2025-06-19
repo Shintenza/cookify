@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { CommentFormData, RecipeFormData } from "./types";
+import { CommentFormData, RecipeFormData, SearchFilters } from "./types";
 import {
   createRecipe,
   getRecipeDetails,
   saveComment,
+  searchRecipes,
 } from "../services/recipe";
 import { RecipeCreationError } from "../services/errors";
 import { strToNum } from "../utils/path";
@@ -73,4 +74,11 @@ export const handlePostComment = async (req: Request, res: Response) => {
   } catch {}
 
   return res.redirect(`/recipe/${recipeId}`);
+};
+
+export const renderSearch = async (req: Request, res: Response) => {
+  const filters = req.query as SearchFilters;
+  const matchingRecipes = await searchRecipes(filters);
+
+  res.render("recipe/search/index", { recipes: matchingRecipes });
 };

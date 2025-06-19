@@ -11,3 +11,12 @@ export const userMiddleware = (
   }
   next();
 };
+
+export const passQueryToLocals = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  res.locals.query = req.query;
+  next();
+};

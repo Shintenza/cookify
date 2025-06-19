@@ -6,6 +6,7 @@ import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
 import recipeRoutes from "./routes/recipe";
 import fs from "fs";
+import { passQueryToLocals, userMiddleware } from "./middleware/userData";
 
 declare module "express-session" {
   interface SessionData {
@@ -30,10 +31,8 @@ app.use(
   })
 );
 
-app.use((req, res, next) => {
-  res.locals.user = req.session?.user ?? null;
-  next();
-});
+app.use(userMiddleware);
+app.use(passQueryToLocals);
 
 app.set("views", path.join(__dirname, "/views"));
 

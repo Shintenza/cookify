@@ -1,0 +1,42 @@
+mixin Dropdown(name, data, selectedValue, allowEmpty=false)
+  div(class="flex flex-col w-[230px]")
+    label(for=name class="mb-2") Meal type:
+    select(name=name)
+      if allowEmpty
+        option(value="") -- select an option
+      each option in data
+        option(value=option.value selected=(option.value==selectedValue))=option.label
+
+mixin MealTypeDropdown(value, allowEmpty=false)
+  - 
+    const mealTypeOptions = [
+      { value: 'breakfast', label: 'Breakfast' },
+      { value: 'lunch', label: 'Lunch' },
+      { value: 'dessert', label: 'Dessert' },
+      { value: 'dinner', label: 'Dinner' },
+      { value: 'snack', label: 'Snack' },
+      { value: 'salad', label: 'Salad' },
+      { value: 'soup', label: 'Soup' }
+    ]
+  +Dropdown('mealType', mealTypeOptions, value, allowEmpty)
+
+mixin LevelDropdown(value, allowEmpty = false)
+  - 
+    const levelOptions = [
+      { value: 'beginner', label: 'Beginner' },
+      { value: 'intermediate', label: 'Intermediate' },
+      { value: 'advanced', label: 'Advanced' }
+    ]
+  +Dropdown('level', levelOptions, value, allowEmpty)
+
+mixin AvailabilityDropdown(value, allowEmpty)
+  - 
+    const availabilityOptions = [
+      { value: 'very_common', label: 'Very Common' },
+      { value: 'common', label: 'Common' },
+      { value: 'sometimes', label: 'Sometimes Available' },
+      { value: 'rare', label: 'Rare' },
+      { value: 'special_order', label: 'Special Order / Imported' },
+      { value: 'homegrown', label: 'Homegrown / Foraged' }
+    ]
+  +Dropdown('storeAvailability', availabilityOptions, value, allowEmpty)
