@@ -1,6 +1,10 @@
 extends layout
 include partials/recipe.pug
+include partials/commentField.pug
+include partials/comments.pug
 
 block recipeContent
   div(class='w-full mx-auto')
     +Recipe(recipe)
+    +Comments(comments)
+    +CommentField(recipe.id)

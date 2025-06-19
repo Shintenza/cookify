@@ -2,7 +2,7 @@ include profile.pug
 mixin RecipeCard(recipe)
   - const level = recipe.level.charAt(0).toUpperCase() + recipe.level.slice(1); 
   - const type = recipe.mealType.charAt(0).toUpperCase() + recipe.mealType.slice(1); 
-  - const dateStr = new Date(recipe. createdAt).toLocaleDateString();
+  - const dateStr = new Date(recipe.createdAt).toLocaleDateString();
 
   a(href=`/recipe/${recipe.id}`)
     div(class="bg-gray-50 shadow-xs rounded-xl")

@@ -1,6 +1,12 @@
-mixin Profile(name)
+mixin Profile(name, variant="sm", text_disabled=false)
   - const initials = (name || '').trim().slice(0, 2).toUpperCase();
   div.flex.items-center.gap-2
-    div(class="w-[32px] h-[32px] text-white bg-sky-200 rounded-full justify-center items-center flex")
-      span= initials
-    span= name
+    if variant == "sm"
+      div(class="w-[32px] h-[32px] text-white bg-sky-200 rounded-full justify-center items-center flex")
+        span= initials
+    else
+      div(class="w-[58px] h-[58px] text-white bg-sky-200 rounded-full justify-center items-center flex")
+        span= initials
+
+    if !text_disabled
+      span= name

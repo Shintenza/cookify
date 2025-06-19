@@ -24,3 +24,7 @@ export type RecipeFormData = {
 };
 
 export type HomeCardDetails = Pick<RecipeFormData, "name" | "time" | "level">;
+
+export type CommentFormData = {
+  text: string;
+};

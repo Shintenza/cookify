@@ -4,12 +4,14 @@ import { Recipe } from "../models/Recipe";
 import { RecipeCreationError } from "./errors";
 import { User } from "../models/User";
 import { getImagePath } from "../utils/image";
+import { RecipeComment } from "../models/Comment";
 var os = require("os");
 
 const PAGE_LIMIT = 6;
 
 const recipeRepository = AppDataSource.getRepository(Recipe);
 const userRepositoru = AppDataSource.getRepository(User);
+const commentRepository = AppDataSource.getRepository(RecipeComment);
 
 const processDashData = (data: string) => {
   return data
@@ -98,7 +100,41 @@ export const getPaginatedRecipes = async (page?: number) => {
 
 export const getRecipeDetails = async (id: number) => {
   const recipe = await recipeRepository.findOneBy({ id });
+  const comments = await commentRepository.find({
+    relations: ["author"],
+    where: {
+      recipe: {
+        id,
+      },
+    },
+  });
   if (recipe) {
-    return { ...recipe, image: getImagePath(recipe?.image) };
+    return {
+      comments,
+      recipe: {
+        ...recipe,
+        image: getImagePath(recipe?.image),
+      },
+    };
   } else return null;
+};
+
+export const saveComment = async (
+  comment: string,
+  recipeId: number,
+  userEmail: string
+) => {
+  const user = await userRepositoru.findOneBy({ email: userEmail });
+  const recipe = await recipeRepository.findOneBy({ id: recipeId });
+
+  if (!user || !recipe) {
+    throw new Error();
+  }
+
+  const newComment = new RecipeComment();
+  newComment.author = user;
+  newComment.recipe = recipe;
+  newComment.text = comment;
+
+  await commentRepository.save(newComment);
 };

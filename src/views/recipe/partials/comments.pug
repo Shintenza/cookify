@@ -1,0 +1,16 @@
+include ../../partials/profile
+mixin Comments(comments)
+
+  h1.custom-header.mt-10.mb-5 Comments
+  div(class="flex flex-col gap-4")
+    each comment in comments
+      - const createdAt = new Date(recipe.createdAt).toLocaleDateString();
+      div.flex.gap-4.items-start
+        +Profile(comment.author.fullName, "bg", true)
+        div.flex.flex-col.gap-2
+          div.flex.flex-col
+            span(class="font-bold")= comment.author.fullName
+            div
+              i(class="fa-solid fa-calendar-days pr-2")
+              span(class="")= createdAt
+          p= comment.text
