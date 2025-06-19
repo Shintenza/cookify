@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+select {
+  @apply border-1 p-2;
+}
+
+.error-message {
+  @apply text-red-600 text-sm;
+}
+
+.brand-button {
+  @apply border-1 px-8 py-2 cursor-pointer flex justify-center items-center;
+}
+
+.brand-button:hover {
+  @apply bg-black text-white;
+}

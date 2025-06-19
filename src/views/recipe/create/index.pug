@@ -1,0 +1,70 @@
+extends ../layout
+block recipeContent
+  div(class="flex flex-col w-[75%] gap-6")
+    form(action="/recipe" method="post" class="flex gap-4 flex-col" enctype="multipart/form-data") 
+      div.flex.justify-between
+        h1(class="font-semibold text-2xl") Add a new recipe
+        button(class="brand-button") Submit
+      div.flex.flex-col.gap-2
+        label(for="name") Name
+        input(placeholder="e.g. Spaghetti carbonara" name="name", type="text", required, class="border-1 p-2")
+        if errors && errors.name
+          p(class="error-message")=errors.name
+      div.flex.gap-5
+        div.flex.flex-col.flex-1.gap-2
+          p Select an image:
+          label(for="image")
+            div(class="flex aspect-video border-1 cursor-pointer items-center justify-center")
+              i#camera-icon.fa-solid.fa-camera.text-6xl
+              input(type="file" name="image" id="image" accept="image/*" style="display:none")
+              img#preview(src="" alt="Image preview" class="hidden w-full h-full object-cover")
+          if errors && errors.image
+            p(class="error-message")=errors.image
+        div.flex.flex-col.flex-1.gap-2
+          label(for="description") Description
+          textarea(name="description", required, class="border-1 h-full p-2", placeholder="Description of your tasty dish go here...")
+      div.flex.gap-5
+        div.flex.flex-col
+          label(for="mealType") Select meal type:
+          select(name="mealType")
+            option(value="breakfast") Breakfast
+            option(value="lunch") Lunch
+            option(value="dessert") Dessert
+            option(value="dinner") Dinner
+            option(value="snack") Snack
+            option(value="salad") Salad
+            option(value="soup") Soup
+        div.flex.flex-col
+          label(for="level") Level:
+          select(name="level")
+            option(value="beginner") Beginner
+            option(value="intermediate") Intermediate
+            option(value="advanced") Advanced
+        div.flex.flex-col
+          label(for="storeAvailabilty") Ingredients Availability:
+          select(name="storeAvailability")
+            option(value="very_common") Very Common
+            option(value="common") Common
+            option(value="sometimes") Sometimes Available
+            option(value="rare") Rare
+            option(value="special_order") Special Order / Imported
+            option(value="homegrown") Homegrown / Foraged
+        div.flex.flex-col
+          label(for="time") Preparation time (minues):
+          input(type="number", name="time" class="border-1 p-2")
+          if errors && errors.time
+            p(class="error-message")=errors.time
+      div.flex.flex-col.gap-2
+        div
+          label(for="ingredients") Ingredients
+          p(class="text-sm text-gray-500") Every ingredient should start with a dash (-)
+        textarea(name="ingredients", required, class="border-1 p-2 min-h-[120px]" placeholder="- first ingredient\n- second ingredient")
+        if errors && errors.ingredients
+          p(class="error-message")=errors.ingredients
+      div.flex.flex-col.gap-2
+        div
+          label(for="steps") Preparation
+          p(class="text-sm text-gray-500") Every step should start with a dash (-)
+        textarea(name="steps", required, class="border-1 p-2 min-h-[120px]" placeholder="- first step of your recipe\n- second step of your recipe")
+        if errors && errors.steps
+          p(class="error-message")=errors.steps

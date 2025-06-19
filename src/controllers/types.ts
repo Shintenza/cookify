@@ -1,3 +1,5 @@
+import { MealType, SkillLevel, StoreAvailability } from "../types/recipe";
+
 export type RegisterData = {
   fullName: string;
   email: string;
@@ -7,4 +9,16 @@ export type RegisterData = {
 export type LoginData = {
   email: string;
   password: string;
+};
+
+export type RecipeFormData = {
+  name: string;
+  description: string;
+  image: File;
+  mealType: MealType;
+  level: SkillLevel;
+  storeAvailability: StoreAvailability;
+  ingredients: string;
+  steps: string;
+  time: number;
 };

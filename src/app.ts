@@ -4,6 +4,8 @@ import session from "express-session";
 import config from "./config/config";
 import mainRoutes from "./routes/main";
 import authRoutes from "./routes/auth";
+import recipeRoutes from "./routes/recipe";
+import fs from "fs";
 
 declare module "express-session" {
   interface SessionData {
@@ -38,6 +40,12 @@ app.get("/", (req, res) => {
   res.render("home/index", { title: "Home Page" });
 });
 
+const uploadDir = "uploads";
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
+app.use("/recipe", recipeRoutes);
 app.use("/", mainRoutes);
 app.use("/", authRoutes);
 
