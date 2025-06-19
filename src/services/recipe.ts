@@ -8,7 +8,7 @@ import { RecipeComment } from "../models/Comment";
 import { ILike } from "typeorm";
 var os = require("os");
 
-const PAGE_LIMIT = 6;
+export const PAGE_LIMIT = 6;
 
 const recipeRepository = AppDataSource.getRepository(Recipe);
 const userRepositoru = AppDataSource.getRepository(User);

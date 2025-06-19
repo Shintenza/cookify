@@ -1,0 +1,17 @@
+mixin Pagination(currentPage, total, limit, destination)
+  - 
+    const canGoLeft = currentPage > 1;
+    const numberOfPages = Math.ceil(total / limit);
+    const canGoRight = currentPage < numberOfPages;
+
+  div.flex
+    a(href=`${destination}?page=${canGoLeft ? parseInt(currentPage) - 1 : currentPage}`)
+      button(disabled=!canGoLeft class=`w-[32px] h-[32px] ${canGoLeft ? "bg-black" : "bg-gray-400 cursor-not-allowed"} text-white`)
+        i(class="fa-solid fa-chevron-left")
+
+    div(class="w-[32px] h-[32px] flex items-center justify-center")
+      p= currentPage
+
+    a(href=`${destination}?page=${canGoRight ? parseInt(currentPage) + 1 : currentPage}`)
+      button(disabled=!canGoRight, class=`w-[32px] h-[32px] ${canGoRight ? "bg-black" : "bg-gray-400 cursor-not-allowed"} text-white`)
+        i(class="fa-solid fa-chevron-right")

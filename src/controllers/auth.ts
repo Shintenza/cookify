@@ -48,3 +48,8 @@ export const handleLogin = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const handleLogout = (req: Request, res: Response) => {
+  req.session.user = null;
+  res.redirect("/");
+};
