@@ -7,12 +7,14 @@ import authRoutes from "./routes/auth";
 import recipeRoutes from "./routes/recipe";
 import fs from "fs";
 import { passQueryToLocals, userMiddleware } from "./middleware/userData";
+import { UserRole } from "./types/user";
 
 declare module "express-session" {
   interface SessionData {
     user?: {
       email: string;
       fullName: string;
+      role: UserRole;
     } | null;
   }
 }

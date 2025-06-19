@@ -19,6 +19,7 @@ export const handleRegister = async (req: Request, res: Response) => {
     req.session.user = {
       fullName: createdUser.fullName,
       email: createdUser.email,
+      role: createdUser.role,
     };
     res.redirect("/");
   } catch (e) {
@@ -40,6 +41,7 @@ export const handleLogin = async (req: Request, res: Response) => {
     req.session.user = {
       fullName: user.fullName,
       email: user.email,
+      role: user.role,
     };
     res.redirect("/");
   } catch (e) {
