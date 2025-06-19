@@ -3,7 +3,10 @@ import { RecipeFormData } from "../controllers/types";
 import { Recipe } from "../models/Recipe";
 import { RecipeCreationError } from "./errors";
 import { User } from "../models/User";
+import { getImagePath } from "../utils/image";
 var os = require("os");
+
+const PAGE_LIMIT = 6;
 
 const recipeRepository = AppDataSource.getRepository(Recipe);
 const userRepositoru = AppDataSource.getRepository(User);
@@ -56,7 +59,6 @@ export const createRecipe = async (
     throw new Error();
   }
 
-  console.log("RECIPE OBJ", recipe);
   const dbRecipe = new Recipe();
   dbRecipe.name = recipe.name;
   dbRecipe.image = image!.filename;
@@ -73,4 +75,30 @@ export const createRecipe = async (
 
   const savedRecipe = await recipeRepository.save(dbRecipe);
   return savedRecipe;
+};
+
+export const getPaginatedRecipes = async (page?: number) => {
+  const pageNumber = page ?? 1;
+  const skip = (pageNumber - 1) * PAGE_LIMIT;
+
+  const [data, total] = await recipeRepository.findAndCount({
+    skip,
+    take: PAGE_LIMIT,
+    relations: ["author"],
+  });
+
+  return {
+    recipes: data.map((recipe) => ({
+      ...recipe,
+      image: getImagePath(recipe.image),
+    })),
+    count: total,
+  };
+};
+
+export const getRecipeDetails = async (id: number) => {
+  const recipe = await recipeRepository.findOneBy({ id });
+  if (recipe) {
+    return { ...recipe, image: getImagePath(recipe?.image) };
+  } else return null;
 };

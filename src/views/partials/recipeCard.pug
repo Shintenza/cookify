@@ -1,0 +1,29 @@
+include profile.pug
+mixin RecipeCard(recipe)
+  - const level = recipe.level.charAt(0).toUpperCase() + recipe.level.slice(1); 
+  - const type = recipe.mealType.charAt(0).toUpperCase() + recipe.mealType.slice(1); 
+  - const dateStr = new Date(recipe. createdAt).toLocaleDateString();
+
+  a(href=`/recipe/${recipe.id}`)
+    div(class="bg-gray-50 shadow-xs rounded-xl")
+      img(src=recipe.image, class="w-full aspect-video rounded-t-xl")
+      div(class="p-3 flex flex-col gap-2")
+        div(class="flex justify-between")
+          h1(class="font-bold")=recipe.name
+          div.flex.gap-1.items-center
+            i(class="fa-regular fa-clock")
+            span=recipe.time
+        div.flex.justify-between
+          +Profile(recipe.author.fullName)
+          div
+            i(class="fa-solid fa-bowl-food")
+            span(class="pl-2")= type
+
+        div.flex.justify-between
+          div
+            i(class="fa-solid fa-fire-flame-curved")
+            span(class="pl-2")= level
+          div
+            i(class="fa-regular fa-calendar-days")
+            span(class="pl-2")= dateStr
+

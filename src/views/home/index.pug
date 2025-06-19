@@ -1,4 +1,9 @@
 extends layout
+include ../partials/recipeCard.pug
+
 block pageContent
-  h1.text-red-300.text-xl.font-bold Welcome to #{title}
-  p This is the index page using express-ejs-layouts.
+  div(class="flex flex-col gap-5")
+    h1(class="custom-header") Recently added
+    div(class="grid grid-cols-3 gap-3")
+      each recipe in recipes
+        +RecipeCard(recipe)

@@ -1,0 +1,43 @@
+mixin List(title, items)
+    div
+      h2(class="mb-2 font-bold")= title
+      div.flex.flex-col
+      each item in items
+        div.flex.gap-2.items-center
+          div(class="w-[10px] h-[10px] border-1 rounded-full")
+          div
+            span= item
+
+mixin Recipe(recipe)
+  - const availability = recipe.storeAvailability.replace("_", " ");
+  div
+    img(src=recipe.image, class="w-full h-[600px] object-none object-center rounded-xl")
+  div(class="mt-10 mb-6")
+    h1(class="custom-header")=recipe.name
+  div(class="flex items-center justify-between py-4 px-6 mb-6")
+    div
+      div(class="flex items-center space-x-6 text-gray-700 text-xs font-semibold")
+        div(class="flex flex-col items-center")
+          span TIME
+          span(class="font-bold")=`${recipe.time} MIN`
+        div(class="h-6 border-l border-gray-300 mx-3")
+        div(class="flex flex-col items-center")
+          span LEVEL
+          span(class="font-bold uppercase")=recipe.level
+        div(class="h-6 border-l border-gray-300 mx-3")
+        div(class="flex flex-col items-center")
+          span INGREDIENTS AVAILABILITY
+          span(class="font-bold uppercase")=availability
+        div(class="h-6 border-l border-gray-300 mx-3")
+        div(class="flex flex-col items-center")
+          span MEAL TYPE
+          span(class="font-bold uppercase")=recipe.mealType
+    div.flex.items-center.gap-4
+      span Print the recipe
+      i(class="fa-solid fa-print text-5xl")
+
+  div(class="flex gap-[128px]")
+    +List("Ingredients", recipe.ingredeints)
+    +List("Preparation", recipe.steps)
+    
+    

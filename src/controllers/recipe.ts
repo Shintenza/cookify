@@ -1,13 +1,31 @@
 import { Request, Response } from "express";
 import { RecipeFormData } from "./types";
-import { createRecipe } from "../services/recipe";
+import { createRecipe, getRecipeDetails } from "../services/recipe";
 import { RecipeCreationError } from "../services/errors";
+import { strToNum } from "../utils/path";
 
 export const renderRecipeForm = (req: Request, res: Response) => {
   if (!req.session.user) {
     return res.redirect("/login");
   }
   res.render("recipe/create/index");
+};
+
+export const renderRecipe = async (req: Request, res: Response) => {
+  const recipeId = strToNum(req.params.id);
+
+  if (!recipeId) {
+    return res.redirect("/");
+  }
+
+  const recipe = await getRecipeDetails(recipeId);
+
+  // TODO make 404 screen
+  if (!recipe) {
+    return res.redirect("/");
+  }
+
+  return res.render("recipe/index", { recipe });
 };
 
 export const handleRecipeCreation = async (req: Request, res: Response) => {

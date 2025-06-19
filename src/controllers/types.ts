@@ -22,3 +22,5 @@ export type RecipeFormData = {
   steps: string;
   time: number;
 };
+
+export type HomeCardDetails = Pick<RecipeFormData, "name" | "time" | "level">;

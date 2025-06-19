@@ -1,0 +1,6 @@
+mixin Profile(name)
+  - const initials = (name || '').trim().slice(0, 2).toUpperCase();
+  div.flex.items-center.gap-2
+    div(class="w-[32px] h-[32px] text-white bg-sky-200 rounded-full justify-center items-center flex")
+      span= initials
+    span= name

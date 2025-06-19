@@ -20,6 +20,7 @@ const app = express();
 app.set("view engine", "pug");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -35,10 +36,6 @@ app.use((req, res, next) => {
 });
 
 app.set("views", path.join(__dirname, "/views"));
-
-app.get("/", (req, res) => {
-  res.render("home/index", { title: "Home Page" });
-});
 
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {

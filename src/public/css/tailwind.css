@@ -15,3 +15,7 @@ select {
 .brand-button:hover {
   @apply bg-black text-white;
 }
+
+.custom-header {
+  @apply font-bold text-2xl
+}

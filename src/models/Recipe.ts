@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToMany,
   ManyToOne,
@@ -39,6 +40,9 @@ export class Recipe {
 
   @Column("simple-array")
   steps!: string[];
+
+  @CreateDateColumn()
+  createdAt!: Date;
 
   @ManyToOne(() => User)
   author!: User;
