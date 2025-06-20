@@ -22,3 +22,7 @@ export const registerSchema = z.object({
   email: z.string(),
   password: z.string(),
 });
+
+export const commentSchema = z.object({
+  text: z.string(),
+});

@@ -4,9 +4,9 @@ import {
   getPaginatedRecipes,
   getRecipeDetails,
   removeRecipe,
+  saveComment,
 } from "../../services/recipe";
 import { strToNum } from "../../utils/path";
-import { RecipeFormData } from "../types";
 
 export const getAllRecipes = async (
   req: Request,
@@ -64,5 +64,18 @@ export const postRecipe = async (req: Request, res: Response): Promise<any> => {
     return res.sendStatus(200);
   } catch (e) {
     return res.sendStatus(500);
+  }
+};
+
+export const postComment = async (req: Request, res: Response) => {
+  const recipeId = strToNum(req.params.id);
+  const user = req.user!;
+  const { text } = req.body;
+
+  try {
+    await saveComment(text, recipeId!, user.email);
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(500);
   }
 };
