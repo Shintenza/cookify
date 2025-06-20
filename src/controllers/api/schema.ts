@@ -11,3 +11,14 @@ export const recipeSchema = z.object({
   ingredeints: z.array(z.string().min(1)).min(1),
   steps: z.array(z.string().min(1)).min(1),
 });
+
+export const loginSchema = z.object({
+  email: z.string(),
+  password: z.string(),
+});
+
+export const registerSchema = z.object({
+  fullName: z.string(),
+  email: z.string(),
+  password: z.string(),
+});

@@ -1,7 +1,7 @@
 extends layout
 
 block pageContent
-	form(method="POST", action="/register")
+	form(method="POST", action="register")
 		div.flex.gap-5.flex-col
 			div.flex.flex-col.gap-2
 				label(for="fullName") Full name:
@@ -18,5 +18,5 @@ block pageContent
 			button(type="submit" class="border-1 w-[128px] py-2 px-3 ml-auto mr-auto hover:bg-black hover:text-white") Register
 			div.flex.gap-2
 				p Have an account?
-				a(href="/login") 
+				a(href="login") 
 					span.text-orange-600 Log in

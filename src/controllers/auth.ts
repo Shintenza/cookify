@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { LoginData, RegisterData } from "./types";
 import { loginUser, registerUser } from "../services/auth";
 import { UserExists } from "../services/errors";
+import { redirectWithPrefix } from "../utils/path";
 
 export const renderLogin = (req: Request, res: Response) => {
   res.render("auth/login");
@@ -21,7 +22,7 @@ export const handleRegister = async (req: Request, res: Response) => {
       email: createdUser.email,
       role: createdUser.role,
     };
-    res.redirect("/");
+    redirectWithPrefix(res, "/");
   } catch (e) {
     if (e instanceof UserExists) {
       res.render("auth/register", {
@@ -43,7 +44,7 @@ export const handleLogin = async (req: Request, res: Response) => {
       email: user.email,
       role: user.role,
     };
-    res.redirect("/");
+    redirectWithPrefix(res, "/");
   } catch (e) {
     res.render("auth/login", {
       error: "Invalid email or password",
@@ -53,5 +54,5 @@ export const handleLogin = async (req: Request, res: Response) => {
 
 export const handleLogout = (req: Request, res: Response) => {
   req.session.user = null;
-  res.redirect("/");
+  redirectWithPrefix(res, "/");
 };

@@ -11,7 +11,7 @@ mixin List(title, items)
 mixin Recipe(recipe)
   - const availability = recipe.storeAvailability.replace("_", " ");
   div
-    img(src=recipe.image, class="w-full h-[600px] object-none object-center rounded-xl")
+    img(src=recipe.image, class="w-full h-[600px] object-cover object-center rounded-xl")
   div(class="mt-10 mb-6")
     h1(class="custom-header")=recipe.name
   div(class="flex items-center justify-between py-4 px-6 mb-6")

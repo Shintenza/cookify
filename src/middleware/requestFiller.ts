@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import config from "../config/config";
 export const userMiddleware = (
   req: Request,
   res: Response,
@@ -18,5 +19,14 @@ export const passQueryToLocals = (
   next: NextFunction
 ) => {
   res.locals.query = req.query;
+  next();
+};
+
+export const passPrefixToLocals = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  res.locals.prefix = config.prefix === "/" ? "/" : `/${config.prefix}/`;
   next();
 };

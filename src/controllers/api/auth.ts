@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { LoginData } from "../types";
-import { loginUser } from "../../services/auth";
-import { InvalidCredentials } from "../../services/errors";
+import { loginUser, registerUser } from "../../services/auth";
+import { InvalidCredentials, UserExists } from "../../services/errors";
 import { signJwt } from "../../utils/jwt";
 
 export const postLogin = async (req: Request, res: Response): Promise<any> => {
@@ -28,5 +28,22 @@ export const postLogin = async (req: Request, res: Response): Promise<any> => {
       return res.sendStatus(401);
     }
     return res.sendStatus(500);
+  }
+};
+
+export const postRegister = async (req: Request, res: Response) => {
+  const registerData = req.body;
+
+  try {
+    await registerUser(registerData);
+    res.sendStatus(200);
+  } catch (e) {
+    if (e instanceof UserExists) {
+      res
+        .status(400)
+        .json({ message: "an account with this email already exists" });
+    } else {
+      res.sendStatus(500);
+    }
   }
 };

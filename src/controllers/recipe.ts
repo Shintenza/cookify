@@ -7,11 +7,11 @@ import {
   searchRecipes,
 } from "../services/recipe";
 import { RecipeCreationError } from "../services/errors";
-import { strToNum } from "../utils/path";
+import { redirectWithPrefix, strToNum } from "../utils/path";
 
 export const renderRecipeForm = (req: Request, res: Response) => {
   if (!req.session.user) {
-    return res.redirect("/login");
+    return redirectWithPrefix(res, "/login");
   }
   res.render("recipe/create/index");
 };
@@ -20,14 +20,14 @@ export const renderRecipe = async (req: Request, res: Response) => {
   const recipeId = strToNum(req.params.id);
 
   if (!recipeId) {
-    return res.redirect("/");
+    return redirectWithPrefix(res, "/");
   }
 
   const { recipe, comments } = (await getRecipeDetails(recipeId)) ?? {};
 
   // TODO make 404 screen
   if (!recipe) {
-    return res.redirect("/");
+    return redirectWithPrefix(res, "/");
   }
 
   return res.render("recipe/index", { recipe, comments });
@@ -38,19 +38,19 @@ export const handleRecipeCreation = async (req: Request, res: Response) => {
   const image = req.file;
 
   if (!req.session.user) {
-    return res.redirect("/login");
+    return redirectWithPrefix(res, "/login");
   }
 
   try {
     const userEmail = req.session.user.email;
     const savedRecipe = await createRecipe(recipeDetails, userEmail, image);
-    res.redirect(`/recipe/${savedRecipe.id}`);
+    redirectWithPrefix(res, `/recipe/${savedRecipe.id}`);
   } catch (e) {
     if (e instanceof RecipeCreationError) {
       return res.render("recipe/create/index", { errors: e.errors });
     } else {
       // TODO add better error handling here
-      return res.redirect("/");
+      return redirectWithPrefix(res, "/");
     }
   }
 };
@@ -59,11 +59,11 @@ export const handlePostComment = async (req: Request, res: Response) => {
   const recipeId = strToNum(req.params.id);
 
   if (!recipeId) {
-    return res.redirect("/");
+    return redirectWithPrefix(res, "/");
   }
 
   if (!req.session.user) {
-    return res.redirect("/login");
+    return redirectWithPrefix(res, "/login");
   }
 
   const { text } = req.body as CommentFormData;
@@ -73,7 +73,7 @@ export const handlePostComment = async (req: Request, res: Response) => {
     await saveComment(text, recipeId, userEmail);
   } catch {}
 
-  return res.redirect(`/recipe/${recipeId}`);
+  return redirectWithPrefix(res, `/recipe/${recipeId}`);
 };
 
 export const renderSearch = async (req: Request, res: Response) => {

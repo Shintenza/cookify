@@ -1,19 +1,19 @@
 div(class="flex justify-between h-[128px] items-center px-[64px] border-b-2 mb-[32px]")
-  a(href="/")
+  a(href="")
     div.flex.gap-3.items-center
       i.fa-solid.fa-cookie-bite.text-6xl
       h1.text-bold.text-4xl.font-semibold Cookify
   div.flex.gap-10.items-center
-    a(href="/recipe/search") Search recipe
+    a(href="recipe/search") Search recipe
     if user
       div
-        a(href="/recipe/create") Add recipe
-      form(method="POST" action="/logout")
+        a(href="recipe/create") Add recipe
+      form(method="POST" action="logout")
         button(class="brand-button gap-2", type="submit") 
           i.fa-solid.fa-chevron-left
           span Logout
     else
-      a(href='/login')
+      a(href='login')
         button(class="brand-button gap-2")
           i.fa-solid.fa-arrow-right-to-bracket
           span Log in

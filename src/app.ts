@@ -7,7 +7,11 @@ import authRoutes from "./routes/auth";
 import recipeRoutes from "./routes/recipe";
 import restRouter from "./routes/api";
 import fs from "fs";
-import { passQueryToLocals, userMiddleware } from "./middleware/userData";
+import {
+  passPrefixToLocals,
+  passQueryToLocals,
+  userMiddleware,
+} from "./middleware/requestFiller";
 import { UserRole } from "./types/user";
 
 declare module "express-session" {
@@ -47,6 +51,7 @@ app.use(
 
 app.use(userMiddleware);
 app.use(passQueryToLocals);
+app.use(passPrefixToLocals);
 
 app.set("views", path.join(__dirname, "/views"));
 
@@ -57,7 +62,7 @@ if (!fs.existsSync(uploadDir)) {
 
 app.use("/api", restRouter);
 app.use("/recipe", recipeRoutes);
-app.use("/", mainRoutes);
 app.use("/", authRoutes);
+app.use("/", mainRoutes);
 
 export default app;
