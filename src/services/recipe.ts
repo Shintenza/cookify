@@ -93,6 +93,9 @@ export const getPaginatedRecipes = async (page?: number) => {
     skip,
     take: PAGE_LIMIT,
     relations: ["author"],
+    order: {
+      createdAt: "DESC",
+    },
   });
 
   return {
