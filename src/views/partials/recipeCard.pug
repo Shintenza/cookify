@@ -6,7 +6,7 @@ mixin RecipeCard(recipe)
 
   a(href=`recipe/${recipe.id}`)
     div(class="bg-gray-50 shadow-xs rounded-xl")
-      img(src=recipe.image, class="w-full aspect-video rounded-t-xl")
+      img(src=recipe.image, class="w-full aspect-video rounded-t-xl object-cover")
       div(class="p-3 flex flex-col gap-2")
         div(class="flex justify-between")
           h1(class="font-bold")=recipe.name

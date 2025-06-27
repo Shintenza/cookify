@@ -1,6 +1,6 @@
-mixin Dropdown(name, data, selectedValue, allowEmpty=false)
+mixin Dropdown(name, data, selectedValue, fieldLabel, allowEmpty=false)
   div(class="flex flex-col w-[230px]")
-    label(for=name class="mb-2") Meal type:
+    label(for=name class="mb-2")= fieldLabel
     select(name=name)
       if allowEmpty
         option(value="") -- select an option
@@ -18,7 +18,7 @@ mixin MealTypeDropdown(value, allowEmpty=false)
       { value: 'salad', label: 'Salad' },
       { value: 'soup', label: 'Soup' }
     ]
-  +Dropdown('mealType', mealTypeOptions, value, allowEmpty)
+  +Dropdown('mealType', mealTypeOptions, value, "Meal type", allowEmpty)
 
 mixin LevelDropdown(value, allowEmpty = false)
   - 
@@ -27,7 +27,7 @@ mixin LevelDropdown(value, allowEmpty = false)
       { value: 'intermediate', label: 'Intermediate' },
       { value: 'advanced', label: 'Advanced' }
     ]
-  +Dropdown('level', levelOptions, value, allowEmpty)
+  +Dropdown('level', levelOptions, value, "Level" ,allowEmpty)
 
 mixin AvailabilityDropdown(value, allowEmpty)
   - 
@@ -39,4 +39,4 @@ mixin AvailabilityDropdown(value, allowEmpty)
       { value: 'special_order', label: 'Special Order / Imported' },
       { value: 'homegrown', label: 'Homegrown / Foraged' }
     ]
-  +Dropdown('storeAvailability', availabilityOptions, value, allowEmpty)
+  +Dropdown('storeAvailability', availabilityOptions, value, "Availability", allowEmpty)

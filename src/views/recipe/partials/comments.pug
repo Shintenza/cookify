@@ -1,7 +1,10 @@
 include ../../partials/profile
 mixin Comments(comments)
+  - const isEmpty = comments.length === 0
 
   h1.custom-header.mt-10.mb-5 Comments
+  if isEmpty
+    p There are no comments for this recipe :(
   div(class="flex flex-col gap-4")
     each comment in comments
       - const createdAt = new Date(recipe.createdAt).toLocaleDateString();

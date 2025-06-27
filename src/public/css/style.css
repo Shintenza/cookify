@@ -418,6 +418,9 @@
   .object-cover {
     object-fit: cover;
   }
+  .object-none {
+    object-fit: none;
+  }
   .object-center {
     object-position: center;
   }
