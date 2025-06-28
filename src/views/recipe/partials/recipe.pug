@@ -32,9 +32,6 @@ mixin Recipe(recipe)
         div(class="flex flex-col items-center")
           span MEAL TYPE
           span(class="font-bold uppercase")=recipe.mealType
-    div.flex.items-center.gap-4
-      span Print the recipe
-      i(class="fa-solid fa-print text-5xl")
 
   div(class="flex gap-[128px]")
     +List("Ingredients", recipe.ingredeints)
